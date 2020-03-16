@@ -269,7 +269,7 @@ NodeStatistics::AdvancePosition (Ptr<Node> node, int stepsSize, int stepsTime)
   pos.x += stepsSize;
   SetPosition (node, pos);
   NS_LOG_INFO ("At time " << Simulator::Now ().GetSeconds () << " sec; setting new position to " << pos);
-  Simulator::Schedule (Seconds (stepsTime), &NodeStatistics::AdvancePosition, this, node, stepsSize, stepsTime);
+  Simulator::Schedule (milliseconds (stepsTime), &NodeStatistics::AdvancePosition, this, node, stepsSize, stepsTime);
 }
 
 Gnuplot2dDataset
@@ -310,7 +310,7 @@ int main (int argc, char *argv[])
   int sta1_y = 0;
   uint32_t steps = 100;
   uint32_t stepsSize = 1;
-  uint32_t stepsTime = 0.1;
+  uint32_t stepsTime = 100;
 
   CommandLine cmd;
   cmd.AddValue ("manager", "PRC Manager", manager);
@@ -398,7 +398,7 @@ int main (int argc, char *argv[])
   NodeStatistics statistics = NodeStatistics (wifiApDevices, wifiStaDevices);
 
   //Move the STA by stepsSize meters every stepsTime seconds
-  Simulator::Schedule (Seconds (0.5 + stepsTime), &NodeStatistics::AdvancePosition, &statistics, wifiStaNodes.Get (0), stepsSize, stepsTime);
+  Simulator::Schedule (milliseconds  (0.5 + stepsTime), &NodeStatistics::AdvancePosition, &statistics, wifiStaNodes.Get (0), stepsSize, stepsTime);
 
   //Configure the IP stack
   InternetStackHelper stack;
