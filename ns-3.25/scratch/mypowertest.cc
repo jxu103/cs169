@@ -298,7 +298,7 @@ int main (int argc, char *argv[])
 {
   double maxPower = 30;
   double minPower = 0;
-  uint32_t powerLevels = 18;
+  uint32_t powerLevels = 31;
   uint32_t m_powerStepSize = 1;
   
   uint32_t rtsThreshold = 3000000;
