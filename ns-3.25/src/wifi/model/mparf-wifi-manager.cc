@@ -131,7 +131,7 @@ mParfWifiManager::CheckInit (mParfWifiRemoteStation *station)
 {
   if (!station->m_initialized)
     {
-      station->m_powerStepSize = 1;
+      station->m_powerStepSize = 1; //init value
       station->m_nSupported = GetNSupported (station);
       station->m_currentRate = station->m_nSupported - 1;
       station->m_currentPower = m_maxPower;
@@ -195,7 +195,7 @@ mParfWifiManager::DoReportDataFailed (WifiRemoteStation *st)
           if (station->m_currentPower < m_maxPower)
             {
               NS_LOG_DEBUG ("station=" << station << " inc power");
-              station->m_currentPower = min(station->m_currentPower + station->m_powerStepSize, m_maxPower);
+              station->m_currentPower = min(station->m_currentPower + station->m_powerStepSize, m_maxPower); //new method to inc
               m_powerChange (station->m_currentPower, station->m_state->m_address);
               station->m_usingRecoveryPower = false;
             }
@@ -220,7 +220,7 @@ mParfWifiManager::DoReportDataFailed (WifiRemoteStation *st)
           else
             {
               NS_LOG_DEBUG ("station=" << station << " inc power");
-              station->m_currentPower = min(station->m_currentPower + station->m_powerStepSize, m_maxPower);
+              station->m_currentPower = min(station->m_currentPower + station->m_powerStepSize, m_maxPower); //new method of inc
               m_powerChange (station->m_currentPower, station->m_state->m_address);
             }
         }
@@ -263,7 +263,7 @@ void mParfWifiManager::DoReportDataOk (WifiRemoteStation *st,
       && (station->m_currentRate < (station->m_state->m_operationalRateSet.size () - 1)))
     {
       NS_LOG_DEBUG ("station=" << station << " inc rate");
-      station->m_currentPower = min(station->m_currentPower + station->m_powerStepSize, m_maxPower);
+      station->m_currentPower = min(station->m_currentPower + station->m_powerStepSize, m_maxPower); //new method to inc
       m_rateChange (station->m_currentRate, station->m_state->m_address);
       station->m_nAttempt = 0;
       station->m_nSuccess = 0;

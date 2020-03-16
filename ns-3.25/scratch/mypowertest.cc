@@ -358,8 +358,8 @@ int main (int argc, char *argv[])
 
   //Configure the STA node
   wifi.SetRemoteStationManager ("ns3::MinstrelWifiManager", "RtsCtsThreshold", UintegerValue (rtsThreshold));
-  wifiPhy.Set ("TxPowerStart", DoubleValue (30));
-  wifiPhy.Set ("TxPowerEnd", DoubleValue (30));
+  wifiPhy.Set ("TxPowerStart", DoubleValue (30)); //new powerstart value for STA
+  wifiPhy.Set ("TxPowerEnd", DoubleValue (30)); // new value for powerend
 
   Ssid ssid = Ssid ("AP");
   wifiMac.SetType ("ns3::StaWifiMac",
@@ -368,9 +368,9 @@ int main (int argc, char *argv[])
   wifiStaDevices.Add (wifi.Install (wifiPhy, wifiMac, wifiStaNodes.Get (0)));
 
   //Configure the AP node
-  wifi.SetRemoteStationManager (manager, "DefaultTxPowerLevel", UintegerValue (maxPower), "RtsCtsThreshold", UintegerValue (rtsThreshold),"m_powerStepSize", UintegerValue (m_powerStepSize));
-  wifiPhy.Set ("TxPowerStart", DoubleValue (0));
-  wifiPhy.Set ("TxPowerEnd", DoubleValue (30));
+  wifi.SetRemoteStationManager (manager, "DefaultTxPowerLevel", UintegerValue (maxPower), "RtsCtsThreshold", UintegerValue (rtsThreshold),"m_powerStepSize", UintegerValue (m_powerStepSize)); //added powerstep size
+  wifiPhy.Set ("TxPowerStart", DoubleValue (0)); //new value
+  wifiPhy.Set ("TxPowerEnd", DoubleValue (30)); //new value
   wifiPhy.Set ("TxPowerLevels", UintegerValue (31));
 
   ssid = Ssid ("AP");
