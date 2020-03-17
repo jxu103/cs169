@@ -457,7 +457,7 @@ int main (int argc, char *argv[])
   gnuplot.AddDataset (statistics.GetDatafile ());
   gnuplot.GenerateOutput (outfile);
 
-  if (manager.compare ("ns3::ParfWifiManager") == 0 ||
+  if (manager.compare ("ns3::mParfWifiManager") == 0 ||
       manager.compare ("ns3::AparfWifiManager") == 0)
     {
       std::ofstream outfile2 (("power-" + outputFileName + ".plt").c_str ());
