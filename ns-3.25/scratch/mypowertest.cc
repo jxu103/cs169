@@ -309,7 +309,7 @@ int main (int argc, char *argv[])
   int sta1_x = 5;
   int sta1_y = 0;
   uint32_t steps = 100;
-  uint32_t stepsSize = 1;
+  uint32_t stepsSize = 2;
   uint32_t stepsTime = 100;
 
   CommandLine cmd;
