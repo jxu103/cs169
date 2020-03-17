@@ -416,11 +416,11 @@ int main (int argc, char *argv[])
 
   OnOffHelper onoff ("ns3::UdpSocketFactory", InetSocketAddress (sinkAddress, port));
   onoff.SetConstantRate (DataRate ("54Mb/s"), packetSize);
-  onoff.SetAttribute ("StartTime", TimeValue (Seconds (0.5)));
+  onoff.SetAttribute ("StartTime", TimeValue (MilliSeconds (500)));
   onoff.SetAttribute ("StopTime", TimeValue (MilliSeconds (simuTime))); //seconds to ms
   ApplicationContainer apps_source = onoff.Install (wifiApNodes.Get (0));
 
-  apps_sink.Start (Seconds (0.5));
+  apps_sink.Start (MilliSeconds (500));
   apps_sink.Stop (MilliSeconds (simuTime)); //seconds to ms
 
   //------------------------------------------------------------
@@ -452,7 +452,7 @@ int main (int argc, char *argv[])
   std::ofstream outfile (("throughput-" + outputFileName + ".plt").c_str ());
   Gnuplot gnuplot = Gnuplot (("throughput-" + outputFileName + ".eps").c_str (), "Throughput");
   gnuplot.SetTerminal ("post eps color enhanced");
-  gnuplot.SetLegend ("Time (seconds)", "Throughput (Mb/s)");
+  gnuplot.SetLegend ("Time (milliseconds)", "Throughput (Mb/s)");
   gnuplot.SetTitle ("Throughput (AP to STA) vs time");
   gnuplot.AddDataset (statistics.GetDatafile ());
   gnuplot.GenerateOutput (outfile);
@@ -463,7 +463,7 @@ int main (int argc, char *argv[])
       std::ofstream outfile2 (("power-" + outputFileName + ".plt").c_str ());
       gnuplot = Gnuplot (("power-" + outputFileName + ".eps").c_str (), "Average Transmit Power");
       gnuplot.SetTerminal ("post eps color enhanced");
-      gnuplot.SetLegend ("Time (seconds)", "Power (mW)");
+      gnuplot.SetLegend ("Time (milliseconds)", "Power (mW)");
       gnuplot.SetTitle ("Average transmit power (AP to STA) vs time");
       gnuplot.AddDataset (statistics.GetPowerDatafile ());
       gnuplot.GenerateOutput (outfile2);

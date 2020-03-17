@@ -1,7 +1,7 @@
 set terminal post eps color enhanced
 set output "throughput-parf.eps"
 set title "Throughput (AP to STA) vs time"
-set xlabel "Time (seconds)"
+set xlabel "Time (milliseconds)"
 set ylabel "Throughput (Mb/s)"
 plot "-"  title "Throughput Mbits/s" with lines
 5 0
