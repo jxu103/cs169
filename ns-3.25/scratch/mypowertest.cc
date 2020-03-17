@@ -417,11 +417,11 @@ int main (int argc, char *argv[])
   OnOffHelper onoff ("ns3::UdpSocketFactory", InetSocketAddress (sinkAddress, port));
   onoff.SetConstantRate (DataRate ("54Mb/s"), packetSize);
   onoff.SetAttribute ("StartTime", TimeValue (Seconds (0.5)));
-  onoff.SetAttribute ("StopTime", TimeValue (Seconds (simuTime)));
+  onoff.SetAttribute ("StopTime", TimeValue (MilliSeconds (simuTime))); //seconds to ms
   ApplicationContainer apps_source = onoff.Install (wifiApNodes.Get (0));
 
   apps_sink.Start (Seconds (0.5));
-  apps_sink.Stop (Seconds (simuTime));
+  apps_sink.Stop (MilliSeconds (simuTime)); //seconds to ms
 
   //------------------------------------------------------------
   //-- Setup stats and data collection
@@ -446,7 +446,7 @@ int main (int argc, char *argv[])
   Config::Connect ("/NodeList/0/DeviceList/*/$ns3::WifiNetDevice/RemoteStationManager/$" + manager + "/RateChange",
                    MakeCallback (RateCallback));
 
-  Simulator::Stop (Seconds (simuTime));
+  Simulator::Stop (MilliSeconds (simuTime)); //seconds to ms
   Simulator::Run ();
 
   std::ofstream outfile (("throughput-" + outputFileName + ".plt").c_str ());
