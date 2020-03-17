@@ -73,7 +73,7 @@ mParfWifiManager::GetTypeId (void)
                    MakeUintegerChecker<uint32_t> ())
     .AddAttribute ("m_powerStepSize",
 				   "to add power step size",
-				   UintegerValue (1),
+				   UintegerValue (3),
                    MakeUintegerAccessor (&mParfWifiManager::m_powerStepSize),
                    MakeUintegerChecker<uint32_t> ())
     .AddTraceSource ("PowerChange",
@@ -131,7 +131,7 @@ mParfWifiManager::CheckInit (mParfWifiRemoteStation *station)
 {
   if (!station->m_initialized)
     {
-      station->m_powerStepSize = 1; //init value
+      station->m_powerStepSize = 3; //init value
       station->m_nSupported = GetNSupported (station);
       station->m_currentRate = station->m_nSupported - 1;
       station->m_currentPower = m_maxPower;
